@@ -101,3 +101,193 @@ The following migration phases were completed during this project:
 ![Architecture Diagram](images/architecture-diagram.png)
 
 ---
+## Setting Up the Local “On-Prem” Application
+
+### Purpose
+
+Before migrating the application to AWS, I first deployed and tested the Employee Directory Application in a local on-premises environment on my machine.
+
+This step allowed me to establish a baseline version of the application before beginning the cloud migration process.
+
+By running the application locally, I was able to:
+
+- Understand how the application behaves in a traditional on-premises environment
+- Capture “before migration” screenshots for project documentation
+- Prepare the same environment that would later be recreated on Amazon EC2
+- Compare local versus cloud performance and functionality after migration
+
+---
+
+### Step 1: Install Node.js
+
+The Employee Directory Application uses Node.js for the backend server, so I first installed Node.js and npm on my local machine.
+
+I downloaded the LTS version from the official Node.js website:
+
+- https://nodejs.org/en/download/prebuilt-installer
+
+After installation, I verified both Node.js and npm were installed successfully by running:
+
+```bash
+node -v
+npm -v
+```
+
+---
+
+### Step 2: Install MySQL (Local Database Layer)
+
+The application uses MySQL as its relational database for storing employee records and application data.
+
+I installed MySQL Community Server from:
+
+- https://dev.mysql.com/downloads/mysql/
+
+During installation, I recorded:
+
+- MySQL username
+- MySQL password
+- Port number (3306)
+
+---
+
+### Step 3: Create the Database and Application User
+
+I logged into MySQL as the root user:
+
+```bash
+mysql -u root -p
+```
+
+I then created the database:
+
+```sql
+CREATE DATABASE employee_db;
+```
+
+Created the application user:
+
+```sql
+CREATE USER 'employee_user'@'%' IDENTIFIED BY 'StrongPassword123';
+```
+
+Granted permissions:
+
+```sql
+GRANT ALL PRIVILEGES ON employee_db.* TO 'employee_user'@'%';
+FLUSH PRIVILEGES;
+```
+
+Selected the database:
+
+```sql
+USE employee_db;
+```
+
+Created the employees table:
+
+```sql
+CREATE TABLE employees (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  full_name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  role VARCHAR(100),
+  department VARCHAR(100),
+  location VARCHAR(100),
+  join_date DATE NULL,
+  photo_url VARCHAR(255) DEFAULT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+Exited MySQL:
+
+```sql
+EXIT;
+```
+
+---
+
+### Step 4: Download the Employee Directory Application
+
+I cloned the repository:
+
+```bash
+git clone https://github.com/techwithlucy/ztc-projects.git
+```
+
+Moved into the project directory:
+
+```bash
+cd ztc-projects/projects/cloud-engineer-projects/project-1
+```
+
+Installed dependencies:
+
+```bash
+npm install
+```
+
+---
+
+### Step 5: Configure Environment Variables
+
+I created the `.env` file:
+
+```bash
+vim .env
+```
+
+Added the following configuration:
+
+```env
+DB_HOST=localhost
+DB_USER=employee_user
+DB_PASSWORD=StrongPassword123
+DB_NAME=employee_db
+PORT=3000
+```
+
+---
+
+### Step 6: Start the Local Application
+
+I started the application server:
+
+```bash
+npm start
+```
+
+Successful startup output:
+
+```bash
+Server running on http://localhost:3000
+Connected to MySQL successfully
+```
+
+---
+
+### Step 7: Access the Employee Directory UI
+
+I opened the application in my browser:
+
+```text
+http://localhost:3000
+```
+
+I tested the application by adding sample employee records to verify database connectivity and application functionality.
+
+---
+
+### Final Outcome
+
+By the end of this section, I had:
+
+- A fully working Employee Directory Application running locally
+- A functioning MySQL database with employee records
+- A complete on-premises simulation of the application
+- The “before migration” version of the environment
+
+In the next section, I will migrate the application from my local machine to Amazon EC2.
+
+---
