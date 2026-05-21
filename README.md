@@ -101,16 +101,3 @@ The following migration phases were completed during this project:
 ![Architecture Diagram](images/architecture-diagram.png)
 
 ---
-
-### Final Result
-
-At the end of this project, I successfully achieved the following:
-
-- Deployed the Employee Directory Application on Amazon EC2
-- Migrated the MySQL database to Amazon RDS (MySQL)
-- Configured secure AWS networking and access controls
-- Performed successful database migration using AWS DMS
-- Completed application testing and migration cutover
-- Built a fully functional cloud-hosted Employee Directory Application running on AWS
-
----
