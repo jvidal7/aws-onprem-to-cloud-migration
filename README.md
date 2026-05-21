@@ -123,7 +123,7 @@ The following migration phases were completed during this project:
 
 ## ### Architecture Diagram
 
-![Architecture Diagram](./architecture-diagram.png)
+![Architecture Diagram](images/architecture-diagram.png)
 
 ---
 
