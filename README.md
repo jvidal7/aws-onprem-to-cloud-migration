@@ -3,7 +3,7 @@ Migrated an on-prem Employee Directory application to AWS using EC2, Amazon RDS,
 
 # aws-onprem-to-cloud-migration
 
-## ### Project Overview
+### Project Overview
 
 In this project, I migrated an on-premises Employee Directory Web Application to AWS using a scalable and cloud-native architecture. The original application was hosted on a single Linux server with a local MySQL database, which created several operational and scalability challenges as the company expanded.
 
@@ -13,7 +13,7 @@ This project demonstrates real-world cloud migration practices including infrast
 
 ---
 
-## ### Scenario
+### Scenario
 
 CloudHR Systems is a growing HR software provider that relies on an internal Employee Directory Web Application to manage:
 
@@ -39,7 +39,7 @@ To improve reliability, scalability, and long-term operational efficiency, I mig
 
 ---
 
-## ### My Role as the Cloud Engineer
+### My Role as the Cloud Engineer
 
 As the Cloud Engineer for this project, I was responsible for performing a complete migration of the Employee Directory Application from the on-premises environment to AWS.
 
@@ -55,23 +55,7 @@ My responsibilities included:
 
 ---
 
-## ### Solution Architecture
-
-I rebuilt the Employee Directory Application using a modern two-tier AWS architecture designed for scalability, reliability, and improved availability.
-
-The solution included:
-
-- Deploying the application server on Amazon EC2
-- Migrating the MySQL database into Amazon RDS (MySQL)
-- Using AWS DMS for continuous database replication and migration
-- Configuring Security Groups, VPC networking, and environment variables
-- Performing end-to-end testing before final cutover
-
-This project mirrors real-world cloud migration projects commonly performed by Cloud Engineers during enterprise cloud adoption initiatives.
-
----
-
-## ### About the Project
+### About the Project
 
 In this hands-on cloud migration project, I:
 
@@ -86,7 +70,7 @@ This project also serves as a professional portfolio project demonstrating pract
 
 ---
 
-## ### Project Steps
+### Project Steps
 
 The following migration phases were completed during this project:
 
@@ -98,7 +82,7 @@ The following migration phases were completed during this project:
 
 ---
 
-## ### AWS Services Used
+### AWS Services Used
 
 | Service | Purpose |
 |---|---|
@@ -112,22 +96,13 @@ The following migration phases were completed during this project:
 
 ---
 
-## ### Estimated Time & Cost
-
-| Category | Estimate |
-|---|---|
-| Estimated Time | 2–3 Hours |
-| Estimated Cost | Approximately \$2–\$4 (Free Tier Eligible) |
-
----
-
-## ### Architecture Diagram
+### Architecture Diagram
 
 ![Architecture Diagram](images/architecture-diagram.png)
 
 ---
 
-## ### Final Result
+### Final Result
 
 At the end of this project, I successfully achieved the following:
 
