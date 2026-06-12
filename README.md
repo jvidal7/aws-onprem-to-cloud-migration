@@ -152,7 +152,9 @@ npm start
 
 ### Step 6: Validate Application Functionality
 
-I accessed the Employee Directory application through the browser and created sample employee records to verify application functionality and database persistence.
+After successfully starting the application, I accessed the Employee Directory web interface and performed functional testing by creating multiple employee records across different departments and locations.
+
+This validation confirmed that the application was functioning correctly and that employee data was being successfully stored in the MySQL database.
 
 ### Screenshot
 
@@ -163,12 +165,12 @@ I accessed the Employee Directory application through the browser and created sa
 ### Outcome
 
 At the end of this phase, I successfully:
-
-* Deployed the application in a local on-premises environment
-* Configured a MySQL database and application user
-* Validated database connectivity
-* Verified application functionality
-* Established the baseline environment for migration to AWS
+- Deployed the application in a local on-premises environment
+- Configured and connected the MySQL database
+- Verified successful application-to-database connectivity
+- Created and stored employee records in the database
+- Validated application functionality and data persistence
+- Established the baseline environment for migration to AWS
 
 ---
 
