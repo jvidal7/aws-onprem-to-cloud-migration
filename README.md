@@ -174,3 +174,166 @@ At the end of this phase, I successfully:
 
 ---
 
+## Simulated On-Premises Server on Amazon EC2
+
+### Objective
+
+I deployed the Employee Directory application and MySQL database on an Ubuntu EC2 instance to create a Linux-based simulated on-premises environment.
+
+This environment will serve as the source workload for the upcoming database migration to Amazon RDS using AWS Database Migration Service (DMS).
+
+---
+
+### Step 1: Launch and Configure the EC2 Instance
+
+I launched an Ubuntu EC2 instance to host the Employee Directory application and MySQL database.
+
+I configured:
+
+* Ubuntu Server 24.04 LTS
+* Public IPv4 connectivity
+* SSH access for server administration
+* TCP port `3000` for application access
+* Security Group rules to control inbound traffic
+
+### Screenshot
+
+![EC2 Instance](images/06-ec2-instance.png)
+
+**Capture:** The EC2 console showing the instance in the **Running** state. Include the instance name, instance type, and status.
+
+---
+
+### Step 2: Connect to the EC2 Instance
+
+I connected to the Ubuntu EC2 instance using SSH to perform the server configuration and application deployment.
+
+```bash
+ssh -i your-key.pem ubuntu@<EC2_PUBLIC_IP>
+```
+
+I then installed and verified Node.js, npm, and Git to prepare the server for the Employee Directory application.
+
+```bash
+node -v
+npm -v
+git --version
+```
+
+### Screenshot
+
+![EC2 Server Environment](images/07-ec2-environment.png)
+
+
+**Capture:** The SSH terminal showing the successful connection and the Node.js, npm, and Git versions.
+
+---
+
+### Step 3: Configure MySQL on EC2
+
+I installed and configured MySQL Server on the EC2 instance to provide the database layer for the Employee Directory application.
+
+I created:
+
+* `employee_db` database
+* `employee_user` application account
+* Required database privileges
+* `employees` table
+
+I verified the database configuration using:
+
+```sql
+SHOW DATABASES;
+USE employee_db;
+SHOW TABLES;
+```
+
+### Screenshot
+
+![EC2 MySQL Database](images/08-ec2-mysql-database.png)
+
+**Screenshot filename:** `08-ec2-mysql-database.png`
+
+**Capture:** The MySQL terminal showing that `employee_db` exists and `SHOW TABLES;` returns the `employees` table.
+
+---
+
+### Step 4: Deploy the Employee Directory Application
+
+I cloned the Employee Directory application onto the EC2 instance and installed the required Node.js dependencies.
+
+```bash
+git clone https://github.com/techwithlucy/ztc-projects.git
+
+cd ztc-projects/projects/cloud-engineer-projects/project-1
+
+npm install
+```
+
+I then configured the application environment variables to connect the Node.js backend to the MySQL database running on the EC2 instance.
+
+---
+
+### Step 5: Start the Application on EC2
+
+I started the Node.js application and verified that it successfully connected to the MySQL database.
+
+```bash
+npm start
+```
+
+### Screenshot
+
+![EC2 Application Startup](images/09-ec2-application-startup.png)
+
+**Screenshot filename:** `09-ec2-application-startup.png`
+
+**Capture:** The terminal showing both the application server running on port `3000` and the successful MySQL connection.
+
+For example:
+
+```text
+Server running at http://localhost:3000
+Connected to MySQL as: employee_user
+```
+
+---
+
+### Step 6: Validate Application Functionality
+
+I accessed the Employee Directory application remotely through the EC2 instance and created multiple employee records to validate application functionality and database persistence.
+
+This confirmed that:
+
+* The application was successfully running on EC2
+* The application was remotely accessible
+* The Node.js backend successfully connected to MySQL
+* Employee records could be created and retrieved
+* Employee data persisted in the MySQL database
+
+### Screenshot
+
+![Employee Directory Running on EC2](images/10-ec2-employee-directory.png)
+
+**Screenshot filename:** `10-ec2-employee-directory.png`
+
+**Capture:** My browser showing the Employee Directory running from the EC2 instance with several employee records visible.
+
+---
+
+### Outcome
+
+At the end of this phase, I successfully:
+
+* Provisioned an Ubuntu EC2 instance
+* Configured network access using Security Groups
+* Installed the required application runtime and dependencies
+* Installed and configured MySQL Server
+* Deployed the Employee Directory application
+* Established application-to-database connectivity
+* Validated remote application access and data persistence
+* Established the EC2-hosted MySQL database as the source environment for the upcoming AWS DMS migration
+
+The next phase will migrate the MySQL database from this simulated on-premises environment to Amazon RDS for MySQL using AWS Database Migration Service (DMS).
+
+---
