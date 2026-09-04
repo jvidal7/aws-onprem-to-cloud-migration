@@ -634,3 +634,138 @@ The database migration from the simulated on-premises environment to Amazon RDS 
 The next phase will update the Employee Directory application to use **Amazon RDS MySQL** instead of the MySQL database running locally on the EC2 source server.
 
 ---
+
+---
+
+## Cutover: Point the Application to Amazon RDS
+
+### Objective
+
+I completed the final application cutover by updating the Employee Directory application to use Amazon RDS MySQL instead of the MySQL database running locally on the EC2 instance.
+
+This transitioned the application from the simulated on-premises database environment to the managed AWS database environment.
+
+---
+
+### Step 1: Stop the Application on EC2
+
+I connected to the EC2 instance and navigated to the Employee Directory application directory.
+
+```bash
+cd ~/ztc-projects/projects/cloud-engineer-projects/project-1
+```
+
+I stopped the existing Node.js process before modifying the application's database configuration.
+
+```bash
+sudo pkill node
+```
+
+---
+
+### Step 2: Update the Database Configuration
+
+I updated the application's `.env` configuration to replace the local MySQL connection with the Amazon RDS MySQL endpoint.
+
+```text
+DB_HOST=<RDS_ENDPOINT>
+DB_USER=admin
+DB_PASSWORD=<RDS_PASSWORD>
+DB_NAME=employee_db
+PORT=3000
+```
+
+> Database credentials and the `.env` file are not included in this repository.
+
+---
+
+### Step 3: Restart the Application
+
+After updating the database configuration, I restarted the Node.js application.
+
+```bash
+npm start
+```
+
+The application successfully connected to MySQL using the RDS administrator account, confirming that the database connection had been redirected from the EC2-hosted MySQL instance to Amazon RDS.
+
+### Screenshot
+
+![Application Connected to Amazon RDS](images/23-rds-application-connection.png)
+
+---
+
+### Step 4: Validate the Application After Cutover
+
+I accessed the Employee Directory application through the EC2 instance and confirmed that the employee records previously migrated with AWS DMS were still available.
+
+I also created a new employee record after the cutover to verify that the application could successfully write new data to Amazon RDS.
+
+### Screenshot
+
+![Employee Directory After RDS Cutover](images/24-rds-cutover-application.png)
+
+---
+
+### Step 5: Verify Post-Cutover Data in Amazon RDS
+
+I connected directly to the Amazon RDS MySQL database and queried the `employees` table.
+
+```sql
+USE employee_db;
+SELECT * FROM employees;
+```
+
+The query confirmed that the RDS database contained both the records migrated through AWS DMS and the new record created through the application after cutover.
+
+### Screenshot
+
+![Post-Cutover RDS Data Verification](images/25-rds-post-cutover-data.png)
+
+---
+
+### Outcome
+
+I successfully completed the application and database migration by:
+
+- Migrating the MySQL database from the simulated on-premises EC2 environment to Amazon RDS using AWS DMS
+- Updating the Node.js application to use the RDS endpoint
+- Validating application-to-RDS connectivity
+- Confirming that previously migrated employee records remained available
+- Creating new application data after cutover
+- Verifying that the new data was persisted directly in Amazon RDS
+
+The final application architecture now uses Amazon EC2 for the Node.js application tier and Amazon RDS MySQL for the managed database tier.
+
+---
+
+---
+
+## Conclusion
+
+I successfully completed an end-to-end cloud migration project by taking an Employee Directory application from a simulated on-premises environment and migrating it to AWS using modern cloud services.
+
+Throughout this project, I deployed and configured the application infrastructure, migrated the MySQL database using AWS Database Migration Service (DMS), and performed a final application cutover to Amazon RDS.
+
+I also validated the migration by confirming that the original employee records were successfully transferred to RDS and that new records created through the application were written directly to the new cloud database.
+
+### What I Accomplished
+
+- Ran and tested the Employee Directory application locally as the initial on-premises baseline
+- Deployed the Node.js application and source MySQL database on Amazon EC2
+- Configured security groups and database connectivity between AWS resources
+- Provisioned an Amazon RDS MySQL database
+- Configured AWS DMS source and target endpoints
+- Migrated the employee database from EC2 MySQL to Amazon RDS using AWS DMS
+- Verified the migrated records directly in the RDS database
+- Updated the application's environment configuration to use the RDS endpoint
+- Performed the final application cutover from the EC2-hosted MySQL database to Amazon RDS
+- Validated the completed migration by creating a new employee through the application and confirming the record was stored in RDS
+
+### Final Result
+
+I transformed the original locally hosted application into a cloud-hosted AWS architecture where the Node.js application runs on Amazon EC2 and the production database is hosted on Amazon RDS MySQL.
+
+This project gave me hands-on experience with the complete migration lifecycle, including infrastructure deployment, networking, database migration, troubleshooting, validation, and application cutover.
+
+---
