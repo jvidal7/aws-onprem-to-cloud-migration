@@ -635,8 +635,6 @@ The next phase will update the Employee Directory application to use **Amazon RD
 
 ---
 
----
-
 ## Cutover: Point the Application to Amazon RDS
 
 ### Objective
