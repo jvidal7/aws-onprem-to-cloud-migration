@@ -739,8 +739,6 @@ The final application architecture now uses Amazon EC2 for the Node.js applicati
 
 ---
 
----
-
 ## Conclusion
 
 I successfully completed an end-to-end cloud migration project by taking an Employee Directory application from a simulated on-premises environment and migrating it to AWS using modern cloud services.
